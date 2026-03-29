@@ -15,6 +15,10 @@ scaler=pickle.load(open("scaler.pkl", "rb"))
 def home():
     return render_template('home.html')
 
+@app.route('/fancy')
+def fancy():
+    return render_template('home_enhanced.html')
+
 @app.route('/predict_api', methods=['POST'])  
 def predict_api():
     data= request.json['data']

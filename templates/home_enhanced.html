@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boston House Price | Render Ready</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: rgba(15, 23, 42, 0.84);
+      --panel2: rgba(255, 255, 255, 0.06);
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent2: #22d3ee;
+      --radius: 16px;
+      --shadow: 0 20px 40px rgba(15, 23, 42, 0.45);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-main);
+      background: radial-gradient(circle at 20% 20%, #1e293b 0%, #0f172a 38%, #020617 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 16px;
+      overflow: hidden;
+    }
+
+    .nebula {
+      position: absolute;
+      width: 90vmin;
+      height: 90vmin;
+      min-height: 520px;
+      min-width: 520px;
+      background: conic-gradient(from 120deg at 50% 50%, rgba(17, 24, 39, 0.38), rgba(56, 189, 248, 0.42), rgba(59, 130, 246, 0.12), rgba(56, 189, 248, 0.26));
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 1;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      animation: float 16s ease-in-out infinite;
+    }
+
+    @keyframes float { 0%, 100% { transform: translate(-50%, -50%) rotate(0deg);} 50% { transform: translate(-50%, -55%) rotate(164deg);} }
+
+    .layout {
+      z-index: 2;
+      width: min(980px, 100%);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      align-items: stretch;
+    }
+
+    .panel, .preview {
+      background: var(--panel);
+      border: 1px solid var(--panel2);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      padding: 1.45rem;
+    }
+
+    .panel {
+      display: grid;
+      gap: 1rem;
+      min-height: 560px;
+    }
+
+    .panel h1 {
+      margin: 0;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    label {
+      color: #a5b4fc;
+      font-size: 0.70rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    input[type=text] {
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(15, 23, 42, 0.72);
+      color: #e2e8f0;
+      border-radius: 12px;
+      padding: 0.72rem 0.85rem;
+      font-size: 0.95rem;
+      transition: all 180ms ease;
+    }
+
+    input[type=text]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.22);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .big-btn {
+      border: 0;
+      background: linear-gradient(120deg, var(--accent), var(--accent2));
+      color: #0f172a;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 11px;
+      padding: 0.95rem 1.1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      margin-top: 0.35rem;
+    }
+
+    .big-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 27px rgba(56, 189, 248, 0.35);
+    }
+
+    .megaspec {
+      margin: 0;
+      background: linear-gradient(115deg, rgba(255,255,255,0.09), rgba(15,23,42,0.18));
+      border: 1px dashed rgba(148, 163, 184, 0.3);
+      border-radius: 11px;
+      min-height: 270px;
+      color: #f8fafc;
+      padding: 1rem;
+      font-size: 1rem;
+    }
+
+    .megaspec strong {
+      color: #dbeafe;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(148, 163, 184, 0.16);
+      color: #e2e8f0;
+      border-radius: 999px;
+      padding: 0.35rem 0.7rem;
+      font-size: 0.8rem;
+    }
+
+    .bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 920px) {
+      .layout { grid-template-columns: 1fr; }
+      .panel, .preview { min-height: auto; }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="nebula"></div>
+  <div class="layout">
+    <section class="panel" aria-label="Input panel">
+      <h1>Boston House Price AI</h1>
+      <p>Elegantly inject values and compute prediction immediately. Use this design for a pro Render.app production landing style.</p>
+
+      <div class="form-grid">
+        {% for field in ['CRIM','ZN','INDUS','CHAS','NOX','RM','Age','DIS','RAD','TAX','PTRATIO','B','LSTAT'] %}
+          <div class="field">
+            <label for="{{ field }}">{{ field }}</label>
+            <input id="{{ field }}" name="{{ field }}" type="text" placeholder="{{ field }}" required />
+          </div>
+        {% endfor %}
+      </div>
+
+      <button class="big-btn" type="submit">Predict Price</button>
+      <div class="bottom-row">
+        <span class="chip">API route: /predict</span>
+        <span class="chip">Version 2 (enhanced)</span>
+      </div>
+    </section>
+
+    <aside class="preview" aria-label="Prediction output">
+      <p class="megaspec" id="prediction-box">{{ prediction_text or 'Output will appear here after prediction.' }}</p>
+      <p style="margin-top: 1rem; color: #94a3b8; font-size: 0.90rem;">Copy this page content to `home_enhanced.html` and point `home()` to it for Render deployment.</p>
+    </aside>
+  </div>
+</body>
+</html>
