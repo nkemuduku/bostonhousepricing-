@@ -1,6 +1,8 @@
-Flask
-Scikit-learn
-Pandas
-Numpy
-Matplotlib
-gunicorn
+# This project was built against an older ML stack.
+# Use Python 3.7-3.10 for best compatibility with the pickled model artifacts.
+Flask==2.2.5
+scikit-learn==1.0.2
+pandas==1.3.5
+numpy==1.21.6
+matplotlib==3.5.3
+gunicorn==20.1.0
